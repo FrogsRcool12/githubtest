@@ -14,61 +14,39 @@
       align-items: center;
       background: radial-gradient(circle at top, #0f0f1a, #050510);
       font-family: Arial, sans-serif;
-      color: white;
+      overflow: hidden;
+    }
+
+    /* 🌈 Shared animated gradient */
+    .rainbow {
+      background: linear-gradient(
+        45deg,
+        red,
+        orange,
+        yellow,
+        green,
+        cyan,
+        blue,
+        violet,
+        red
+      );
+      background-size: 600% 600%;
+      animation: drift 90s linear infinite;
+
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
 
     h1 {
       font-size: 50px;
       margin-bottom: 30px;
       font-weight: bold;
-
-      /* 🌈 slow rainbow text */
-      background: linear-gradient(
-        90deg,
-        red,
-        orange,
-        yellow,
-        green,
-        cyan,
-        blue,
-        violet,
-        red
-      );
-      background-size: 400%;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-
-      animation: rainbow 30s linear infinite;
     }
 
     #counter {
       font-size: 130px;
       font-weight: bold;
-
-      background: linear-gradient(
-        90deg,
-        red,
-        orange,
-        yellow,
-        green,
-        cyan,
-        blue,
-        violet,
-        red
-      );
-      background-size: 400%;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-
-      animation: rainbow 45s linear infinite;
-
       transition: transform 0.1s ease;
-      text-shadow: 0 0 20px rgba(0,0,0,0.3);
-    }
-
-    @keyframes rainbow {
-      0% { background-position: 0% }
-      100% { background-position: 400% }
     }
 
     button {
@@ -77,10 +55,20 @@
       font-size: 20px;
       border: none;
       border-radius: 10px;
-      background: #00f7ff;
-      color: black;
       cursor: pointer;
-      box-shadow: 0 0 20px #00f7ff;
+      box-shadow: 0 0 20px rgba(0,0,0,0.2);
+    }
+
+    /* Make button text also use gradient */
+    button.rainbow {
+      color: transparent;
+      -webkit-text-fill-color: transparent;
+      -webkit-background-clip: text;
+    }
+
+    @keyframes drift {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 600% 50%; }
     }
 
     button:active {
@@ -91,9 +79,11 @@
 
 <body>
 
-  <h1>Global Counter</h1>
-  <div id="counter">0</div>
-  <button id="clickBtn">Click +1</button>
+  <h1 class="rainbow">Global Counter</h1>
+
+  <div id="counter" class="rainbow">0</div>
+
+  <button id="clickBtn" class="rainbow">Click +1</button>
 
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-app.js";
